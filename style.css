@@ -1,0 +1,71 @@
+/* aqua - E3FDFD
+light green - dbffd7
+ EAEAEA
+light white - f3f3f5
+green - 06ac03
+purple - 64199D
+orange - FEB92D */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #dbffd7;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    margin: 90px auto;
+    width: 550px;
+    height: 750px;
+    background-color: #f3f3f5;
+    padding: 25px;
+    gap: 20px;
+}
+
+section{
+    background-color: #EAEAEA;
+}
+
+.display{
+    height: 200px;
+    width: auto;
+}
+.input-container{
+    height: 500px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+article{
+    height: 90px;
+    width: auto;
+    background-color: #64199D;
+}
+.input-btn{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.input-btn div{
+    width: 200px;
+    height: 70px;
+    background-color: white;
+}
+
+.numbers{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.numbers div{
+    width: 100px;
+    height: 70px;
+    background-color: white;
+}
