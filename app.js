@@ -5,12 +5,12 @@ const clear = document.querySelector('.delete');
 const allClear = document.querySelector('.all-clear');
 let previousContent = document.querySelector('.previousContent');
 let currentContent = document.querySelector('.currentContent');
+const point = document.querySelector('.point');
 let operation = null;
 let firstOperand ='';
 let secondOperand = '';
-// let prevOperation = '';
 
-
+//eventListeners below
 numberButtons.forEach(button => {
     button.addEventListener('click',() =>{
         currentDisplay(button);
@@ -25,7 +25,7 @@ operationButtons.forEach(button => {
 
 equalTo.addEventListener('click',() => {
     if(previousContent.textContent === '' || currentContent.textContent === '') return;
-    let result = getCalculation(operation,parseFloat(previousContent.textContent),parseFloat(currentContent.textContent));
+    let result = roundResult(getCalculation(operation,parseFloat(previousContent.textContent),parseFloat(currentContent.textContent)));
     if(result === ''){
         resetScreen();
     }else{
@@ -44,25 +44,30 @@ allClear.addEventListener('click', () => {
     resetScreen();
 });
 
+point.addEventListener('click',() => {
+    appointPoint(point.textContent);
+});
+
+
+//Functons below
+
 function currentDisplay(btn){
-    if(currentContent.textContent.includes('.')) return;
-    if(currentContent.textContent === ''){
-        currentContent.textContent += btn.innerText;
-    }else{
-        currentContent.textContent += btn.innerText;
-    }
+    currentContent.textContent += btn.innerText;
 }
 
 function getOperation(button){
     if(operation !== null) {
-        let result = getCalculation(operation,parseFloat(previousContent.textContent),parseFloat(currentContent.textContent));
+        let result = roundResult(getCalculation(operation,parseFloat(previousContent.textContent),parseFloat(currentContent.textContent)));
         operation = null;
         previousContent.textContent = '';
         currentContent.textContent = result;
+    }else if(currentContent.textContent === ''){
+        return;
+    }else{
+        operation = button.innerText;
+        previousContent.textContent = `${currentContent.textContent} ${operation}`;
+        currentContent.textContent = '';
     }
-    operation = button.innerText;
-    previousContent.textContent = `${currentContent.textContent} ${operation}`;
-    currentContent.textContent = '';
 }
 
 function getCalculation(operation,x,y){
@@ -94,4 +99,14 @@ function resetScreen(){
     previousContent.textContent = '';
     currentContent.textContent = '';
     operation = null;
+}
+
+function roundResult(num){
+    return Math.round(num *1000)/1000;
+}
+
+function appointPoint(input){
+    if(currentContent.textContent.includes('.')) return null;
+    if(currentContent.textContent === '') return currentContent.textContent = '0.';
+    else currentContent.textContent += input;
 }
