@@ -6,14 +6,7 @@ const allClear = document.querySelector('.all-clear');
 let previousContent = document.querySelector('.previousContent');
 let currentContent = document.querySelector('.currentContent');
 let operation = '';
-
-console.log(numberButtons);
-console.log(operationButtons);
-console.log(equalTo);
-console.log(clear);
-console.log(allClear);
-console.log(previousContent);
-console.log(currentContent);
+// let prevOperation = '';
 
 
 numberButtons.forEach(button => {
@@ -28,12 +21,44 @@ operationButtons.forEach(button => {
     });
 });
 
+equalTo.addEventListener('click',() => {
+    if(previousContent.textContent === '' || currentContent.textContent === '') return;
+    let result = getCalculation(operation,parseFloat(previousContent.textContent),parseFloat(currentContent.textContent));
+    previousContent.textContent = '';
+    currentContent.textContent = result;    
+})
+
 function currentDisplay(btn){
-    let value = btn.innerText;
-    currentContent.textContent += value;
+    if(currentContent.textContent === ''){
+        currentContent.textContent += btn.innerText;
+    }
 }
 
 function getOperation(button){
     operation = button.innerText;
-    console.log(operation);
+    // if(previousContent.textContent !== '' && currentContent.textContent !== ''){
+    //     // prevOperation = operation;
+    // }else{
+    if(previousContent.textContent === ''){
+        currentContent.textContent += operation;
+        previousContent.textContent = currentContent.textContent;
+        currentContent.textContent = '';
+    }
+}
+
+function getCalculation(operation,x,y){
+    switch (operation) {
+        case '+':
+            return x+y;
+        case '-':
+            return x-y;
+        case '*':
+            return x*y;
+        case '/':
+            return x/y;
+        case '%':
+            return x%y;
+        default :
+            return null;
+    }
 }
