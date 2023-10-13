@@ -45,6 +45,15 @@ section{
 }
 .previousContent{
     opacity: .70;
+    width: 450px;
+    overflow-wrap: break-word;
+    text-align: right;
+}
+.currentContent{
+    width: 450px;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-align: right;
 }
 .input-container{
     height: 500px;
