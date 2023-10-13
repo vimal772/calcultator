@@ -10,6 +10,7 @@ orange - FEB92D */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    border-radius: 10px;
 }
 
 body{
@@ -35,6 +36,15 @@ section{
 .display{
     height: 200px;
     width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 10px;
+    font-size: 42px;
+}
+.previousContent{
+    opacity: .70;
 }
 .input-container{
     height: 500px;
@@ -46,26 +56,43 @@ section{
 article{
     height: 90px;
     width: auto;
-    background-color: #64199D;
+    background-color: #EAEAEA;
 }
 .input-btn{
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.input-btn div{
-    width: 200px;
+.input-btn button{
+    width: 150px;
     height: 70px;
-    background-color: white;
+    background-color: #E3FDFD;
+    opacity: .75;
+    font-size: 18px;
+}
+.input-btn .operation{
+    width: 100px;
 }
 
-.numbers{
+.number-wrap{
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.numbers div{
+.number-wrap button{
     width: 100px;
     height: 70px;
-    background-color: white;
+    background-color: #E3FDFD;
+    opacity: .75;
+    color: black;
+    font-size: 18px;
+}
+button{
+    cursor: pointer;
+    outline: none;
+    border: 1px solid white;
+}
+button:hover{
+ background-color: white;
+ opacity: 1;
 }
