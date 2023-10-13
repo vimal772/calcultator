@@ -87,12 +87,31 @@ article{
     color: black;
     font-size: 18px;
 }
-button{
+.buttons,
+.all-clear,
+.delete,
+.equals{
     cursor: pointer;
     outline: none;
     border: 1px solid white;
 }
-button:hover{
+.buttons:hover,
+.all-clear:hover,
+.delete:hover,
+.equals:hover{
  background-color: white;
  opacity: 1;
+}
+
+#operators{
+    cursor: pointer;
+    outline: none;
+    border: 1px solid white;
+    background-color: #FEB92D;
+    opacity: .75;
+}
+
+#operators:hover{
+    background-color: white;
+    opacity: 1;
 }
