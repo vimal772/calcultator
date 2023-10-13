@@ -13,31 +13,24 @@ let secondOperand = '';
 //eventListeners below
 numberButtons.forEach(button => {
     button.addEventListener('click',() =>{
-        currentDisplay(button);
+        let txt = button.innerText;
+        currentDisplay(txt);
     });
 });
 
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
-        getOperation(button);
+        let txt = button.innerText;
+        getOperation(txt);
     });
 });
 
 equalTo.addEventListener('click',() => {
-    if(previousContent.textContent === '' || currentContent.textContent === '') return;
-    let result = roundResult(getCalculation(operation,parseFloat(previousContent.textContent),parseFloat(currentContent.textContent)));
-    if(result === ''){
-        resetScreen();
-    }else{
-        previousContent.textContent = '';
-        currentContent.textContent = result;
-        operation = null;
-    }    
+    startCalculation();    
 });
 
 clear.addEventListener('click', () => {
-    let content = currentContent.textContent;
-    currentContent.textContent = content.split('').slice(0,-1).join('');
+    showClear();
 });
 
 allClear.addEventListener('click', () => {
@@ -51,11 +44,11 @@ point.addEventListener('click',() => {
 
 //Functons below
 
-function currentDisplay(btn){
-    currentContent.textContent += btn.innerText;
+function currentDisplay(txt){
+    currentContent.textContent += txt;
 }
 
-function getOperation(button){
+function getOperation(txt){
     if(operation !== null) {
         let result = roundResult(getCalculation(operation,parseFloat(previousContent.textContent),parseFloat(currentContent.textContent)));
         operation = null;
@@ -64,7 +57,7 @@ function getOperation(button){
     }else if(currentContent.textContent === ''){
         return;
     }else{
-        operation = button.innerText;
+        operation = txt;
         previousContent.textContent = `${currentContent.textContent} ${operation}`;
         currentContent.textContent = '';
     }
@@ -110,3 +103,57 @@ function appointPoint(input){
     if(currentContent.textContent === '') return currentContent.textContent = '0.';
     else currentContent.textContent += input;
 }
+
+function showClear(){
+    let content = currentContent.textContent;
+    currentContent.textContent = content.split('').slice(0,-1).join('');
+}
+
+function startCalculation(){
+    if(previousContent.textContent === '' || currentContent.textContent === '') return;
+    let result = roundResult(getCalculation(operation,parseFloat(previousContent.textContent),parseFloat(currentContent.textContent)));
+    if(result === ''){
+        resetScreen();
+    }else{
+        previousContent.textContent = '';
+        currentContent.textContent = result;
+        operation = null;
+    }
+}
+
+//keyboard events
+document.addEventListener('keydown',(event)=> {
+    if(event.key === 'Backspace' || event.key === 'delete'){
+        showClear();
+    }else if(event.key === 'c'){
+        resetScreen();
+    }else if(event.keyCode >= 48 && event.keyCode <= 57){
+        currentDisplay(String.fromCharCode(event.keyCode));
+    }else if(event.key === '.') appointPoint(event.key);
+    else{
+        console.log(event.keyCode);
+        let txt;
+        if(event.keyCode === 187){
+            txt = '+';
+            getOperation(txt);
+        }else if(event.keyCode === 189){
+            txt = '-';
+            getOperation(txt);
+        }
+        else if(event.key === 'm'){
+            txt = '*';
+            getOperation(txt);
+        }
+        else if(event.keyCode === 191){
+            txt = '/';
+            getOperation(txt);
+        }
+        else if(event.key === 'r'){
+            txt = '%';
+            getOperation(txt);
+        }else if(event.key === '=') startCalculation();
+        else{
+            return;
+        }
+    }
+});
